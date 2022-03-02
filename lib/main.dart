@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'screens/tasks_screen.dart';
 
 void main() {
@@ -15,6 +16,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
