@@ -1,42 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../models/task.dart';
+import '../models/task_data.dart';
 import '../screens/add_task_screen.dart';
 import '../widgets/tasks_list.dart';
 
-class TasksScreen extends StatefulWidget {
+class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
-
-
-  @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-
-  List<Task> tasks = [
-    Task(name: 'Buy milk'),
-    Task(name: 'Buy eggs'),
-    Task(name: 'Buy bread'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.lightBlueAccent,
-        child: const Icon(Icons.add),
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            builder: (context) => SingleChildScrollView(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: const AddTaskScreen(),
-            ),
-          );
-        },
+          backgroundColor: Colors.lightBlueAccent,
+          child: const Icon(Icons.add),
+          onPressed: () {
+            showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                builder: (context) => SingleChildScrollView(
+                    child:Container(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: const AddTaskScreen(),
+                    )
+                )
+            );
+          }
       ),
       backgroundColor: Colors.lightBlueAccent,
       body: Column(
@@ -69,7 +57,8 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '${tasks.length} Tasks',
+                  // '$context.watch<TaskData>().tasks.length) Tasks',
+                  '${Provider.of<TaskData>(context).taskCount} Tasks',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -80,16 +69,18 @@ class _TasksScreenState extends State<TasksScreen> {
           ),
           Expanded(
             child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                height: 300.0,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20.0),
-                    topLeft: Radius.circular(20.0),
-                  ),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              height: 300.0,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(20.0),
+                  topLeft: Radius.circular(20.0),
                 ),
-                child: TasksList(tasks: tasks)),
+              ),
+              child: const TasksList(),
+              // child: Provider.of<TaskData>(context).taskCount
+            ),
           ),
         ],
       ),
