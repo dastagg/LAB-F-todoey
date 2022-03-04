@@ -1,63 +1,67 @@
 import 'package:flutter/material.dart';
 
-class AddTaskScreen extends StatelessWidget {
-  AddTaskScreen({required this.addNewTask});
+class AddTaskScreen extends StatefulWidget {
 
-  final Function addNewTask;
+  const AddTaskScreen({Key? key}) : super(key: key);
 
   @override
+  State<AddTaskScreen> createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
+  @override
   Widget build(BuildContext context) {
+
     String? newTaskTitle;
 
     return Container(
-      color: Color(0xff757575),
+      color: const Color(0xFF757575),
       child: Container(
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20),
-            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20.0),
+            topLeft: Radius.circular(20.0),
           ),
         ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 15),
-                child: Text(
-                  'Add Task',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.lightBlueAccent),
-                ),
-              ),
-              TextField(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 40.0),
+              child: Text(
+                'Add Task',
                 textAlign: TextAlign.center,
-                autofocus: true,
-                onChanged: (newValue) {
-                  newTaskTitle = newValue;
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              MaterialButton(
-                height: 50,
-                color: Colors.lightBlueAccent,
-                child: Text(
-                  'Add',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                style: TextStyle(
+                  color: Colors.lightBlueAccent,
+                  fontSize: 30.0,
                 ),
-                onPressed: () {
-                  addNewTask(newTaskTitle);
-                },
-              )
-            ],
-          ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Center(
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  autofocus: true,
+                  onChanged: (newText) {
+                    newTaskTitle = newText;
+                  },
+                ),
+              ),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                primary: Colors.white,
+                backgroundColor: Colors.lightBlueAccent,
+              ),
+              onPressed: () {
+                print(newTaskTitle);
+              },
+              child: const Text('Add'),
+            )
+          ],
         ),
       ),
     );
