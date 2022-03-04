@@ -7,6 +7,7 @@ import '../widgets/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,14 +19,12 @@ class TasksScreen extends StatelessWidget {
                 context: context,
                 isScrollControlled: true,
                 builder: (context) => SingleChildScrollView(
-                    child:Container(
-                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                        child: Container(
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom),
                       child: const AddTaskScreen(),
-                    )
-                )
-            );
-          }
-      ),
+                    )));
+          }),
       backgroundColor: Colors.lightBlueAccent,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
